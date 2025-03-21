@@ -9,6 +9,10 @@ public class Autocomplete implements IAutocomplete {
     Node root;
 
     // Maximum number of suggestions
+    // I'm not sure why we're required to store this as a member variable of this
+    // class because it is not used. The AutoCompleteGUI actually sorts the list
+    // and truncates it based on the value of k, so there's nothing to do with it here.
+    // Probably an oversight on the part of whoever designed this assignment
     int k;
 
     public Autocomplete() {
@@ -24,6 +28,8 @@ public class Autocomplete implements IAutocomplete {
         word = word.toLowerCase();
         Node currentNode = root;
         currentNode.incrementPrefixes();
+
+        // Useful for debugging
         String partialWord = "";
         for (int i = 0; i < word.length(); i++) {
             // This gets the index into the Node's references array
@@ -50,7 +56,7 @@ public class Autocomplete implements IAutocomplete {
     public Node buildTrie(String filename, int k) {
         this.k = k;
         // Read from the file, one line at a time
-        BufferedReader br = null;
+        BufferedReader br;
         try {
             br = new BufferedReader(new FileReader(filename));
         } catch (FileNotFoundException e) {
@@ -61,12 +67,14 @@ public class Autocomplete implements IAutocomplete {
         try {
             while((line = br.readLine()) != null) {
                 line = line.toLowerCase().trim();
+
+                // Each line should be a numerical weight and the String value
                 String[] parts = line.split("\\s+");
                 if (parts.length != 2) {
                     continue;
                 }
 
-                addWord(parts[1], Integer.parseInt(parts[0]));
+                addWord(parts[1], Long.parseLong(parts[0]));
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
