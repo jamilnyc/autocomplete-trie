@@ -45,4 +45,23 @@ class AutoCompleteTest {
         List<ITerm> suggestions = auto.getSuggestions("mal");
         assertEquals(0, suggestions.size());
     }
+
+    @org.junit.jupiter.api.Test
+    void testAutocompleteEmptyString() {
+        Autocomplete auto = new Autocomplete();
+        auto.buildTrie("test1.txt", 3);
+
+        List<ITerm> suggestions = auto.getSuggestions("");
+        assertNotEquals(0, suggestions.size());
+        assertEquals(8, suggestions.size());
+
+        assertEquals("a", suggestions.get(0).getTerm());
+        assertEquals("an", suggestions.get(1).getTerm());
+        assertEquals("answer", suggestions.get(2).getTerm());
+        assertEquals("any", suggestions.get(3).getTerm());
+        assertEquals("bye", suggestions.get(4).getTerm());
+        assertEquals("the", suggestions.get(5).getTerm());
+        assertEquals("their", suggestions.get(6).getTerm());
+        assertEquals("there", suggestions.get(7).getTerm());
+    }
 }
