@@ -6,6 +6,8 @@ This is an implementation of an Autocomplete UI that uses a Trie data structure 
 
 It was done from [this assignment](https://www.seas.upenn.edu/~cit5940/current/assignments/hw05/).
 
+Note: I have no affiliation with the Unversity of Pennsylvania.
+
 ## Running
 
 The `main` program expects two parameters: a path to a file and an integer for the maximum number of results.
