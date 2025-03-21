@@ -1,0 +1,171 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AutoCompleteTest</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">&lt;empty package name&gt;</a>
+</div>
+
+<h1>Coverage Summary for Class: AutoCompleteTest (&lt;empty package name&gt;)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AutoCompleteTest</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (38/38)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;import java.util.List;
+&nbsp;
+&nbsp;import static org.junit.jupiter.api.Assertions.*;
+&nbsp;
+<b class="fc">&nbsp;class AutoCompleteTest {</b>
+&nbsp;
+&nbsp;    @org.junit.jupiter.api.Test
+&nbsp;    void testIsValidWord() {
+<b class="fc">&nbsp;        assertTrue(Autocomplete.isValidWord(&quot;Elephant&quot;));</b>
+<b class="fc">&nbsp;        assertFalse(Autocomplete.isValidWord(&quot;&quot;));</b>
+<b class="fc">&nbsp;        assertFalse(Autocomplete.isValidWord(&quot;Cat2&quot;));</b>
+<b class="fc">&nbsp;        assertFalse(Autocomplete.isValidWord(&quot;Cat!&quot;));</b>
+<b class="fc">&nbsp;        assertFalse(Autocomplete.isValidWord(&quot;C@t&quot;));</b>
+<b class="fc">&nbsp;        assertFalse(Autocomplete.isValidWord(&quot;$@t&quot;));</b>
+<b class="fc">&nbsp;        assertFalse(Autocomplete.isValidWord(&quot; &quot;));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @org.junit.jupiter.api.Test
+&nbsp;    void testAutocompleteSuggestions() {
+<b class="fc">&nbsp;        Autocomplete auto = new Autocomplete();</b>
+<b class="fc">&nbsp;        auto.buildTrie(&quot;test1.txt&quot;, 3);</b>
+&nbsp;
+<b class="fc">&nbsp;        List&lt;ITerm&gt; suggestions = auto.getSuggestions(&quot;a&quot;);</b>
+<b class="fc">&nbsp;        assertEquals(4, suggestions.size());</b>
+&nbsp;
+&nbsp;        // Because the references are alphabetical from a -&gt; z
+&nbsp;        // we expect the suggestions to be alphabetical as well
+<b class="fc">&nbsp;        assertEquals(&quot;a&quot;, suggestions.get(0).getTerm());</b>
+<b class="fc">&nbsp;        assertEquals(&quot;an&quot;, suggestions.get(1).getTerm());</b>
+<b class="fc">&nbsp;        assertEquals(&quot;answer&quot;, suggestions.get(2).getTerm());</b>
+<b class="fc">&nbsp;        assertEquals(&quot;any&quot;, suggestions.get(3).getTerm());</b>
+&nbsp;
+<b class="fc">&nbsp;        suggestions = auto.getSuggestions(&quot;the&quot;);</b>
+<b class="fc">&nbsp;        assertEquals(3, suggestions.size());</b>
+<b class="fc">&nbsp;        assertEquals(&quot;the&quot;, suggestions.get(0).getTerm());</b>
+<b class="fc">&nbsp;        assertEquals(&quot;their&quot;, suggestions.get(1).getTerm());</b>
+<b class="fc">&nbsp;        assertEquals(&quot;there&quot;, suggestions.get(2).getTerm());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @org.junit.jupiter.api.Test
+&nbsp;    void testAutocompleteNoSuggestions() {
+<b class="fc">&nbsp;        Autocomplete auto = new Autocomplete();</b>
+<b class="fc">&nbsp;        auto.buildTrie(&quot;test1.txt&quot;, 3);</b>
+&nbsp;
+<b class="fc">&nbsp;        List&lt;ITerm&gt; suggestions = auto.getSuggestions(&quot;mal&quot;);</b>
+<b class="fc">&nbsp;        assertEquals(0, suggestions.size());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @org.junit.jupiter.api.Test
+&nbsp;    void testAutocompleteEmptyString() {
+<b class="fc">&nbsp;        Autocomplete auto = new Autocomplete();</b>
+<b class="fc">&nbsp;        auto.buildTrie(&quot;test1.txt&quot;, 3);</b>
+&nbsp;
+<b class="fc">&nbsp;        List&lt;ITerm&gt; suggestions = auto.getSuggestions(&quot;&quot;);</b>
+<b class="fc">&nbsp;        assertNotEquals(0, suggestions.size());</b>
+<b class="fc">&nbsp;        assertEquals(8, suggestions.size());</b>
+&nbsp;
+<b class="fc">&nbsp;        assertEquals(&quot;a&quot;, suggestions.get(0).getTerm());</b>
+<b class="fc">&nbsp;        assertEquals(&quot;an&quot;, suggestions.get(1).getTerm());</b>
+<b class="fc">&nbsp;        assertEquals(&quot;answer&quot;, suggestions.get(2).getTerm());</b>
+<b class="fc">&nbsp;        assertEquals(&quot;any&quot;, suggestions.get(3).getTerm());</b>
+<b class="fc">&nbsp;        assertEquals(&quot;bye&quot;, suggestions.get(4).getTerm());</b>
+<b class="fc">&nbsp;        assertEquals(&quot;the&quot;, suggestions.get(5).getTerm());</b>
+<b class="fc">&nbsp;        assertEquals(&quot;their&quot;, suggestions.get(6).getTerm());</b>
+<b class="fc">&nbsp;        assertEquals(&quot;there&quot;, suggestions.get(7).getTerm());</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-03-21 16:32</div>
+</div>
+</body>
+</html>
