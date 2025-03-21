@@ -2,10 +2,13 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Autocomplete implements IAutocomplete {
     Node root;
+
+    // Maximum number of suggestions
     int k;
 
     public Autocomplete() {
@@ -20,19 +23,19 @@ public class Autocomplete implements IAutocomplete {
 
         word = word.toLowerCase();
         Node currentNode = root;
-        root.incrementPrefixes();
+        currentNode.incrementPrefixes();
         String partialWord = "";
         for (int i = 0; i < word.length(); i++) {
             // This gets the index into the Node's references array
             int currentCharacter = word.charAt(i) - 'a';
-            partialWord += (char) currentCharacter;
+            partialWord += word.charAt(i);
 
             if (currentNode.getReferences()[currentCharacter] == null) {
                 currentNode.getReferences()[currentCharacter] = new Node();
             }
 
             // If this is the last character of the word, that means we have a complete word
-            if (currentCharacter == word.length() - 1) {
+            if (i == word.length() - 1) {
                 Node n = new Node(word, weight);
                 n.setWords(1);
                 currentNode.getReferences()[currentCharacter] = n;
@@ -45,6 +48,7 @@ public class Autocomplete implements IAutocomplete {
 
     @Override
     public Node buildTrie(String filename, int k) {
+        this.k = k;
         // Read from the file, one line at a time
         BufferedReader br = null;
         try {
@@ -62,7 +66,7 @@ public class Autocomplete implements IAutocomplete {
                     continue;
                 }
 
-                addWord(parts[0], Integer.parseInt(parts[1]));
+                addWord(parts[1], Integer.parseInt(parts[0]));
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -96,13 +100,45 @@ public class Autocomplete implements IAutocomplete {
 
     @Override
     public List<ITerm> getSuggestions(String prefix) {
-        return null;
+        List<ITerm> suggestions = new ArrayList<>();
+
+        Node currentNode = getSubTrie(prefix);
+        if (currentNode == null) {
+            return suggestions;
+        }
+
+        getSuggestionsHelper(currentNode, suggestions);
+        return suggestions;
+    }
+
+    /**
+     * Recursively populate the list with complete words as we do a depth-first-search
+     * of the Trie starting at the given node.
+     *
+     * @param currentNode The root of the subtrie
+     * @param suggestions The running list of terms to suggest
+     */
+    private void getSuggestionsHelper(Node currentNode, List<ITerm> suggestions) {
+        if (currentNode == null) {
+            return;
+        }
+
+        if (currentNode.isCompleteWord()) {
+            suggestions.add(currentNode.getCopyTerm());
+        }
+
+        for (Node child : currentNode.getReferences()) {
+            if (child == null) {
+                continue;
+            }
+
+            getSuggestionsHelper(child, suggestions);
+        }
     }
 
     public static boolean isValidWord(String word) {
         // String is one or more alphabetic characters
         return word.matches("[a-zA-Z]+");
     }
-
 
 }

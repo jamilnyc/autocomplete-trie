@@ -75,4 +75,12 @@ public class Node {
     public void incrementPrefixes() {
         prefixes += 1;
     }
+
+    public boolean isCompleteWord() {
+        return words > 0;
+    }
+
+    public ITerm getCopyTerm() {
+        return new Term(term.getTerm(), term.getWeight());
+    }
 }

@@ -26,7 +26,8 @@ public class Term implements ITerm {
 
     @Override
     public String toString() {
-        return term + " (" + weight + ")";
+        // The GUI expects the string form of the term to be formatted this way
+        return weight + "\t" + term;
     }
 
     @Override
