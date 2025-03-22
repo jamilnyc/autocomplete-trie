@@ -64,4 +64,16 @@ class AutoCompleteTest {
         assertEquals("their", suggestions.get(6).getTerm());
         assertEquals("there", suggestions.get(7).getTerm());
     }
+
+    @org.junit.jupiter.api.Test
+    void testInvalidFileThrowsException() {
+        try {
+            Autocomplete auto = new Autocomplete();
+            auto.buildTrie("does_not_exist.txt", 3);
+            fail("Should have thrown an exception because the file does not exist");
+        } catch (Exception e) {
+            String message = e.getMessage();
+            assertTrue(message.contains("FileNotFoundException"), "The original exception should have been FileNotFoundException");
+        }
+    }
 }

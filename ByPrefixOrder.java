@@ -2,7 +2,7 @@ import java.util.Comparator;
 
 public class ByPrefixOrder implements Comparator<ITerm> {
     // Length of the prefix
-    private int r;
+    private final int r;
 
     public ByPrefixOrder(int r) {
         this.r = r;

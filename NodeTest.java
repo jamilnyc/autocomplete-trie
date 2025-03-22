@@ -43,4 +43,18 @@ class NodeTest {
         assertEquals(99, n.getTerm().getWeight());
         assertEquals(26, n.getReferences().length);
     }
+
+    @org.junit.jupiter.api.Test
+    void testNodeGetWords() {
+        Node n = new Node("Tiger", 20);
+        n.setWords(10);
+        assertEquals(10, n.getWords());
+    }
+
+    @org.junit.jupiter.api.Test
+    void testNodeGetPrefixes() {
+        Node n = new Node("Tiger", 20);
+        n.setPrefixes(10);
+        assertEquals(10, n.getPrefixes());
+    }
 }

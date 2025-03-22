@@ -111,6 +111,16 @@ class TermTest {
     }
 
     @org.junit.jupiter.api.Test
+    void testInvalidPrefixLengthThrowsException() {
+        try {
+            ITerm.byPrefixOrder(-1);
+            fail("An exception should be thrown when the prefix length is negative");
+        } catch (IllegalArgumentException e) {
+            assertEquals("Prefix length cannot be negative", e.getMessage());
+        }
+    }
+
+    @org.junit.jupiter.api.Test
     void testInvalidNodeThrowsException() {
         try {
             new Node(null, 10);
