@@ -55,15 +55,15 @@ Current scope:     <a href="../../index.html">all classes</a>
     100%
   </span>
   <span class="absValue">
-    (5/5)
+    (6/6)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    97.7%
   </span>
   <span class="absValue">
-    (38/38)
+    (42/43)
   </span>
 </td>
 </tr>
@@ -141,6 +141,18 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;        assertEquals(&quot;their&quot;, suggestions.get(6).getTerm());</b>
 <b class="fc">&nbsp;        assertEquals(&quot;there&quot;, suggestions.get(7).getTerm());</b>
 &nbsp;    }
+&nbsp;
+&nbsp;    @org.junit.jupiter.api.Test
+&nbsp;    void testInvalidFileThrowsException() {
+&nbsp;        try {
+<b class="fc">&nbsp;            Autocomplete auto = new Autocomplete();</b>
+<b class="fc">&nbsp;            auto.buildTrie(&quot;does_not_exist.txt&quot;, 3);</b>
+<b class="nc">&nbsp;            fail(&quot;Should have thrown an exception because the file does not exist&quot;);</b>
+&nbsp;        } catch (Exception e) {
+<b class="fc">&nbsp;            String message = e.getMessage();</b>
+<b class="fc">&nbsp;            assertTrue(message.contains(&quot;FileNotFoundException&quot;), &quot;The original exception should have been FileNotFoundException&quot;);</b>
+&nbsp;        }
+&nbsp;    }
 &nbsp;}
 </code>
 </pre>
@@ -165,7 +177,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-03-21 16:32</div>
+    <div style="float:right;">generated on 2025-03-22 11:54</div>
 </div>
 </body>
 </html>

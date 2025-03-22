@@ -55,15 +55,15 @@ Current scope:     <a href="../../index.html">all classes</a>
     100%
   </span>
   <span class="absValue">
-    (5/5)
+    (7/7)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    88.9%
+    91.7%
   </span>
   <span class="absValue">
-    (16/18)
+    (22/24)
   </span>
 </td>
 </tr>
@@ -120,6 +120,20 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;        assertEquals(99, n.getTerm().getWeight());</b>
 <b class="fc">&nbsp;        assertEquals(26, n.getReferences().length);</b>
 &nbsp;    }
+&nbsp;
+&nbsp;    @org.junit.jupiter.api.Test
+&nbsp;    void testNodeGetWords() {
+<b class="fc">&nbsp;        Node n = new Node(&quot;Tiger&quot;, 20);</b>
+<b class="fc">&nbsp;        n.setWords(10);</b>
+<b class="fc">&nbsp;        assertEquals(10, n.getWords());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @org.junit.jupiter.api.Test
+&nbsp;    void testNodeGetPrefixes() {
+<b class="fc">&nbsp;        Node n = new Node(&quot;Tiger&quot;, 20);</b>
+<b class="fc">&nbsp;        n.setPrefixes(10);</b>
+<b class="fc">&nbsp;        assertEquals(10, n.getPrefixes());</b>
+&nbsp;    }
 &nbsp;}
 </code>
 </pre>
@@ -144,7 +158,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-03-21 16:32</div>
+    <div style="float:right;">generated on 2025-03-22 11:54</div>
 </div>
 </body>
 </html>
