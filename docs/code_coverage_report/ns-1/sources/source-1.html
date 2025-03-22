@@ -107,7 +107,8 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;        assertEquals(&quot;answer&quot;, suggestions.get(2).getTerm());</b>
 <b class="fc">&nbsp;        assertEquals(&quot;any&quot;, suggestions.get(3).getTerm());</b>
 &nbsp;
-<b class="fc">&nbsp;        suggestions = auto.getSuggestions(&quot;the&quot;);</b>
+&nbsp;        // Testing with capital letters
+<b class="fc">&nbsp;        suggestions = auto.getSuggestions(&quot;THE&quot;);</b>
 <b class="fc">&nbsp;        assertEquals(3, suggestions.size());</b>
 <b class="fc">&nbsp;        assertEquals(&quot;the&quot;, suggestions.get(0).getTerm());</b>
 <b class="fc">&nbsp;        assertEquals(&quot;their&quot;, suggestions.get(1).getTerm());</b>
@@ -177,7 +178,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-03-22 11:54</div>
+    <div style="float:right;">generated on 2025-03-22 12:02</div>
 </div>
 </body>
 </html>
