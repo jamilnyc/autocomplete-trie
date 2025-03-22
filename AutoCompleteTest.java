@@ -30,7 +30,8 @@ class AutoCompleteTest {
         assertEquals("answer", suggestions.get(2).getTerm());
         assertEquals("any", suggestions.get(3).getTerm());
 
-        suggestions = auto.getSuggestions("the");
+        // Testing with capital letters
+        suggestions = auto.getSuggestions("THE");
         assertEquals(3, suggestions.size());
         assertEquals("the", suggestions.get(0).getTerm());
         assertEquals("their", suggestions.get(1).getTerm());

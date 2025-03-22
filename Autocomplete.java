@@ -85,6 +85,7 @@ public class Autocomplete implements IAutocomplete {
 
     @Override
     public Node getSubTrie(String prefix) {
+        prefix = prefix.toLowerCase();
         Node currentNode = root;
 
         for(int i = 0; i < prefix.length(); i++) {
