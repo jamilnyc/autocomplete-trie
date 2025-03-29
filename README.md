@@ -22,7 +22,11 @@ In an IDE like IntelliJ, you can create a `Run Configuration` to do this.
 4. Give it a name like "Main"
 5. Under the _Build and run_ options, select your Java version
 6. For the class, use `AutocompleteGUI`
-7. For the arguments, put a file path, followed by a space, followed by a number. You may need to quote the file path if it has spaces.
+7. For the arguments, put a file path, followed by a space, followed by a number. You may need to quote the file path if it has spaces. A relative path from the root of the repository should work here.
+
+```text
+"pokemon.txt" 7
+```
 
 ![The run configuration used to execute this program](img/run_configuration.jpg "Run Configuration")
 
