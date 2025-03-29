@@ -42,16 +42,11 @@ public class Autocomplete implements IAutocomplete {
 
             // If this is the last character of the word, that means we have a complete word
             if (i == word.length() - 1) {
-                if (currentNode.getReferences()[currentCharacter] == null) {
-                    Node n = new Node(word, weight);
-                    n.setWords(1);
-                    currentNode.getReferences()[currentCharacter] = n;
-                } else {
-                    // Node already exists fo this, so mark it as a complete word
-                    Term t = new Term(word, weight);
-                    currentNode.getReferences()[currentCharacter].setTerm(t);
-                    currentNode.getReferences()[currentCharacter].setWords(1);
-                }
+                assert(currentNode.getReferences()[currentCharacter] != null);
+                // Node already exists at this point, so mark it as a complete word
+                Term t = new Term(word, weight);
+                currentNode.getReferences()[currentCharacter].setTerm(t);
+                currentNode.getReferences()[currentCharacter].setWords(1);
             }
 
             currentNode.getReferences()[currentCharacter].incrementPrefixes();
